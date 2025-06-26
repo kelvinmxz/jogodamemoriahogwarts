@@ -1,0 +1,112 @@
+* {
+    padding: 5;
+    margin: 0;
+    
+}
+
+body {
+    height: 100vh;
+    display:flex;
+
+    background-image: url('/imgs/fundoHOG.jpg'); /* Substitua 'caminho-da-imagem.jpg' pelo caminho da sua imagem */
+    background-size: cover; /* Faz a imagem cobrir toda a área */
+    background-position: center; /* Centraliza a imagem */
+    background-attachment: fixed; /* A imagem fica fixa ao rolar a página */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    opacity: 90%;
+
+}
+
+.memory-game {
+    height: 840px;
+    width: 840px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px; /* perspectiva do usuario no eixo z, quanto maior, maior o efeito da perspectiva */
+}
+
+.card {
+    height: calc( 30% - 10px);
+    width: calc(30% - 15px);
+    margin: 10px;
+    position:relative;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transform: scale(1);
+    transform-style: preserve-3d; /* adiciona perspectiva 3d, para que o elemento nao fique achatada no plano */
+    transition: transform .8s; /* adiciona efeito de movimento ao flip do card */
+}
+
+.card:active{
+    transform: scale(1.5);
+    transition: transform 0.5s;
+}
+
+.card-front{
+
+width: 100%;
+height: 100%;
+padding: 20px;
+position: absolute;
+backface-visibility: hidden; 
+/* todo elemento tem uma frente e um verso (ao contrario, como um espelho.) essa propriedade retira o verso */
+}
+
+
+.card-back {
+    background-size: cover;
+    background-position: center ;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: absolute;
+  backface-visibility: hidden; /* todo elemento tem uma frente e um verso (ao contrario, como um espelho.) essa propriedade retira o verso */
+}
+
+.card-front {
+    transform: rotateY(180deg); /* antes, o verso aparecia transparente, pois ambas as imagens tem position absolute, ao girar no eixo Y, elas ficaram com os versos virados */
+}
+
+/* flip card animation */
+
+.card.flip {
+    transform: rotateY(180deg);
+}
+
+
+/* Responsividade para telas menores */
+@media (max-width: 900px) {
+    .memory-game {
+        width: 98vw;
+        height: 98vw;
+        max-width: 98vw;
+        max-height: 98vw;
+    }
+    .card {
+        width: calc(25% - 10px);
+        height: calc(25% - 10px);
+        margin: 5px;
+    }
+}
+
+@media (max-width: 600px) {
+    .memory-game {
+        width: 100vw;
+        height: 100vw;
+        max-width: 100vw;
+        max-height: 100vw;
+    }
+    .card {
+        width: calc(33.33% - 6px);
+        height: calc(33.33% - 6px);
+        margin: 2px;
+    }
+    body {
+        padding: 0;
+    }
+}
